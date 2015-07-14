@@ -1,1 +1,21 @@
+Collection of FAQ on Elasticsearch discuss
+===========================================
+:title: Elasticsearch discuss FAQ
+:website: https://discuss.elastic.co/
+:toc:
+:toc-placement: manual
+:encoding: UTF-8
 
+'''
+
+toc::[]
+
+== Scripting
+
+=== When running a dynamic script I get an exception.
+
+Check the exception message. Does it read something like this: "ScriptException[dynamic scripting for [groovy] disabled]"? Here's the problem you ran into:
+
+"By default you cannot run dynamic groovy scripts (script specified inline in a request or indexed scripts) on Elasticsearch. This is for security so Elasticsearch clusters are not by default left exposed to security vunerabilities due to malicious scripts. Please read https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-scripting.html#modules-scripting1 for more information on this as well as instructions on how use scripts without dynamic scripting (file based scripts) and how to enabled dynamic scripting."
+
+Please read the above link in full and carefully as it directly affects the security of your cluster. (Taken from: <https://discuss.elastic.co/t/script-fields-is-throwing-exception/25498/4>)
